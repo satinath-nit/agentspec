@@ -90,19 +90,19 @@ Choose your preferred installation method:
 Install once and use everywhere:
 
 ```bash
-uv tool install agentspec-cli --from git+https://github.com/your-org/agentspec.git
+uv tool install agentspec-cli --from git+https://github.com/satinath-nit/agentspec.git
 ```
 
 Or with `pipx`:
 
 ```bash
-pipx install git+https://github.com/your-org/agentspec.git
+pipx install git+https://github.com/satinath-nit/agentspec.git
 ```
 
 Or with `pip`:
 
 ```bash
-pip install git+https://github.com/your-org/agentspec.git
+pip install git+https://github.com/satinath-nit/agentspec.git
 ```
 
 Then use the tool directly:
@@ -118,7 +118,7 @@ agentspec init . --ide claude --non-interactive
 To upgrade AgentSpec:
 
 ```bash
-uv tool install agentspec-cli --force --from git+https://github.com/your-org/agentspec.git
+uv tool install agentspec-cli --force --from git+https://github.com/satinath-nit/agentspec.git
 ```
 
 #### Option 2: One-time Usage
@@ -126,7 +126,7 @@ uv tool install agentspec-cli --force --from git+https://github.com/your-org/age
 Run directly without installing:
 
 ```bash
-uvx --from git+https://github.com/your-org/agentspec.git agentspec init <PROJECT_NAME>
+uvx --from git+https://github.com/satinath-nit/agentspec.git agentspec init <PROJECT_NAME>
 ```
 
 Benefits of persistent installation:
@@ -636,13 +636,13 @@ git push origin feature/my-improvement
 The CLI is not installed or not on your PATH. Install it:
 
 ```bash
-uv tool install agentspec-cli --from git+https://github.com/your-org/agentspec.git
+uv tool install agentspec-cli --from git+https://github.com/satinath-nit/agentspec.git
 ```
 
 Or with pip:
 
 ```bash
-pip install git+https://github.com/your-org/agentspec.git
+pip install git+https://github.com/satinath-nit/agentspec.git
 ```
 
 If using `pip` with a virtual environment, make sure it is activated.
@@ -658,7 +658,7 @@ python3 --version
 If you have multiple Python versions, try:
 
 ```bash
-python3.11 -m pip install git+https://github.com/your-org/agentspec.git
+python3.11 -m pip install git+https://github.com/satinath-nit/agentspec.git
 ```
 
 ### `ModuleNotFoundError: No module named 'agentspec_cli'`
