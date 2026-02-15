@@ -1,8 +1,6 @@
 # AgentSpec
 
-> An open-source toolkit for creating, managing, and sharing AI agent configurations and skills. Inspired by [GitHub's spec-kit](https://github.com/github/spec-kit).
-
-AgentSpec brings **Spec-Driven Development (SDD)** to AI-assisted coding. Define your agent behaviors as structured YAML configurations, pair them with prompt files, and let your IDE's AI assistant use them to deliver consistent, repeatable results across your team.
+> An open-source toolkit for creating, managing, and sharing AI agent configurations and skills. Define your agent behaviors as structured YAML configurations, pair them with prompt files, and let your IDE's AI assistant use them to deliver consistent, repeatable results across your team.
 
 Built with Python using [typer](https://typer.tiangolo.com/), [rich](https://rich.readthedocs.io/), and [readchar](https://github.com/magmax/python-readchar) for a polished interactive terminal experience.
 
