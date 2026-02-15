@@ -72,8 +72,7 @@ Think of it as `package.json` for AI agent behaviors.
 | Requirement | Version | Notes |
 |---|---|---|
 | **Python** | 3.11 or higher | Required for the CLI |
-| **pip** | Latest | Comes with Python |
-| **Task** | Any | Optional; for [Taskfile](https://taskfile.dev/) support |
+| **uv** | Latest | Recommended package manager ([docs.astral.sh/uv](https://docs.astral.sh/uv/)) |
 | **Git** | Any | Optional; for version control |
 
 **Check your Python version:**
@@ -84,23 +83,58 @@ python3 --version
 
 ### Installation
 
-**Option A: From source (recommended for contributors)**
+Choose your preferred installation method:
+
+#### Option 1: Persistent Installation (Recommended)
+
+Install once and use everywhere:
 
 ```bash
-git clone https://github.com/your-org/agentspec.git
-cd agentspec
-pip install -e .
+uv tool install agentspec-cli --from git+https://github.com/your-org/agentspec.git
 ```
 
-**Option B: Download the zip**
-
-Download the latest release, unzip, and install:
+Or with `pipx`:
 
 ```bash
-unzip agentspec-v1.0.0.zip
-cd agentspec
-pip install -e .
+pipx install git+https://github.com/your-org/agentspec.git
 ```
+
+Or with `pip`:
+
+```bash
+pip install git+https://github.com/your-org/agentspec.git
+```
+
+Then use the tool directly:
+
+```bash
+# Create new project
+agentspec init <PROJECT_NAME>
+
+# Or initialize in an existing project directory
+agentspec init . --ide claude --non-interactive
+```
+
+To upgrade AgentSpec:
+
+```bash
+uv tool install agentspec-cli --force --from git+https://github.com/your-org/agentspec.git
+```
+
+#### Option 2: One-time Usage
+
+Run directly without installing:
+
+```bash
+uvx --from git+https://github.com/your-org/agentspec.git agentspec init <PROJECT_NAME>
+```
+
+Benefits of persistent installation:
+
+- Tool stays installed and available in PATH
+- No need to create shell aliases
+- Better tool management with `uv tool list`, `uv tool upgrade`, `uv tool uninstall`
+- Cleaner shell configuration
 
 **Verify the installation:**
 
@@ -490,11 +524,11 @@ my-project/
 
 ## Taskfile Commands
 
-If you have [Task](https://taskfile.dev/) installed, use these shortcuts:
+If you have [Task](https://taskfile.dev/) installed and are working from a local clone (see [Contributing](#contributing)), use these shortcuts:
 
 | Command | Description |
 |---|---|
-| `task install` | Install the AgentSpec CLI (`pip install -e .`) |
+| `task install` | Install the CLI in editable mode (for contributors only) |
 | `task validate` | Validate all agent and skill configurations |
 | `task list` | List all agents and skills |
 | `task new-agent` | Create a new agent (interactive) |
@@ -548,7 +582,9 @@ task ci
 
 ## Contributing
 
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide. Here is the quick version:
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
+
+> **Note:** Contributing requires cloning the repo. End users should install via `pipx` or `uv tool install` as described in [Installation](#installation).
 
 ### Quick Start for Contributors
 
@@ -557,7 +593,7 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for the full gu
 git clone https://github.com/your-username/agentspec.git
 cd agentspec
 
-# 2. Install in development mode
+# 2. Install in development mode with test deps
 pip install -e ".[test]"
 
 # 3. Run the full test suite to verify your setup
@@ -597,13 +633,19 @@ git push origin feature/my-improvement
 
 ### `agentspec: command not found`
 
-The CLI is not installed or not on your PATH. Run:
+The CLI is not installed or not on your PATH. Install it:
 
 ```bash
-pip install -e .
+uv tool install agentspec-cli --from git+https://github.com/your-org/agentspec.git
 ```
 
-If using a virtual environment, make sure it is activated.
+Or with pip:
+
+```bash
+pip install git+https://github.com/your-org/agentspec.git
+```
+
+If using `pip` with a virtual environment, make sure it is activated.
 
 ### `Python 3.11+ required`
 
@@ -616,12 +658,12 @@ python3 --version
 If you have multiple Python versions, try:
 
 ```bash
-python3.11 -m pip install -e .
+python3.11 -m pip install git+https://github.com/your-org/agentspec.git
 ```
 
 ### `ModuleNotFoundError: No module named 'agentspec_cli'`
 
-When running tests directly, set the Python path:
+When running tests directly (contributors only), set the Python path:
 
 ```bash
 PYTHONPATH=src python3 -m pytest tests/test_commands.py -v
