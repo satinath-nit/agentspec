@@ -1,0 +1,23 @@
+{
+  "yaml.schemas": {
+    "./templates/agent/agent.yaml": "agents/*/agent.yaml",
+    "./templates/skill/skill.yaml": "skills/*/skill.yaml"
+  },
+  "files.associations": {
+    "*.yaml": "yaml",
+    "*.yml": "yaml"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on"
+  },
+  "task.autoDetect": "on",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true
+  }
+}

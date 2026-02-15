@@ -1,0 +1,28 @@
+name: {{AGENT_NAME}}
+description: {{AGENT_DESCRIPTION}}
+version: 1.0.0
+author: {{AUTHOR}}
+model_preferences:
+  - gpt-4
+  - claude-sonnet
+  - gemini-pro
+tags:
+  - {{TAG1}}
+  - {{TAG2}}
+
+system_prompt: |
+  {{SYSTEM_PROMPT}}
+
+inputs:
+  - name: {{INPUT_NAME}}
+    description: {{INPUT_DESCRIPTION}}
+    required: true
+
+outputs:
+  - name: {{OUTPUT_NAME}}
+    description: {{OUTPUT_DESCRIPTION}}
+    format: markdown
+
+tools:
+  - name: file_write
+    description: Write output to a file
