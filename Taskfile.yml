@@ -1,0 +1,148 @@
+version: '3'
+
+vars:
+  PROJECT_DIR: '{{.ROOT_DIR}}'
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list
+
+  install:
+    desc: Install agentspec CLI (requires Python 3.11+)
+    cmds:
+      - pip install -e .
+
+  validate:
+    desc: Validate all agent and skill configurations
+    cmds:
+      - agentspec validate --project-dir {{.PROJECT_DIR}}
+
+  list:
+    desc: List all agents and skills
+    cmds:
+      - agentspec list --project-dir {{.PROJECT_DIR}}
+
+  new-agent:
+    desc: Create a new agent configuration (interactive)
+    cmds:
+      - agentspec new-agent --project-dir {{.PROJECT_DIR}}
+
+  new-skill:
+    desc: Create a new skill configuration (interactive)
+    cmds:
+      - agentspec new-skill --project-dir {{.PROJECT_DIR}}
+
+  test:
+    desc: Run all tests
+    cmds:
+      - task: test-validate
+      - task: test-python
+      - task: test-cli
+
+  test-validate:
+    desc: Run structure and validation tests
+    cmds:
+      - bash tests/test_validate.sh
+
+  test-python:
+    desc: Run Python unit tests
+    cmds:
+      - PYTHONPATH=src python3 -m pytest tests/test_commands.py -v
+
+  test-cli:
+    desc: Run CLI integration tests
+    cmds:
+      - bash tests/test_cli.sh
+
+  lint:
+    desc: Lint YAML files and check markdown
+    cmds:
+      - task: lint-yaml
+      - task: lint-markdown
+
+  lint-yaml:
+    desc: Validate all YAML files
+    cmds:
+      - |
+        echo "=== YAML Lint ==="
+        errors=0
+        for f in $(find agents skills templates -name "*.yaml" -o -name "*.yml" 2>/dev/null); do
+          if python3 -c "import yaml; yaml.safe_load(open('$f'))" 2>/dev/null; then
+            echo "  OK: $f"
+          else
+            echo "  FAIL: $f"
+            errors=$((errors + 1))
+          fi
+        done
+        if [ "$errors" -gt 0 ]; then
+          echo "YAML lint failed with $errors error(s)"
+          exit 1
+        else
+          echo "All YAML files are valid"
+        fi
+
+  lint-markdown:
+    desc: Check markdown files exist for all configs
+    cmds:
+      - |
+        echo "=== Markdown Check ==="
+        warnings=0
+        for dir in agents/*/; do
+          [ ! -d "$dir" ] && continue
+          if [ ! -f "${dir}prompt.md" ]; then
+            echo "  WARN: ${dir} missing prompt.md"
+            warnings=$((warnings + 1))
+          else
+            echo "  OK: ${dir}prompt.md"
+          fi
+        done
+        for dir in skills/*/; do
+          [ ! -d "$dir" ] && continue
+          if [ ! -f "${dir}prompt.md" ]; then
+            echo "  WARN: ${dir} missing prompt.md"
+            warnings=$((warnings + 1))
+          else
+            echo "  OK: ${dir}prompt.md"
+          fi
+        done
+        echo "Markdown check complete ($warnings warnings)"
+
+  init:
+    desc: Initialize a new agentspec project at a given path
+    cmds:
+      - agentspec init {{.CLI_ARGS}}
+
+  clean:
+    desc: Remove temporary and generated files
+    cmds:
+      - rm -rf tmp/ dist/ build/ *.zip __pycache__ src/*.egg-info
+
+  package:
+    desc: Create a distributable zip of the project
+    cmds:
+      - |
+        VERSION="1.0.0"
+        OUTFILE="agentspec-v${VERSION}.zip"
+        rm -f "$OUTFILE"
+        cd .. && zip -r "agentspec/$OUTFILE" agentspec/ \
+          -x "agentspec/.git/*" \
+          -x "agentspec/*.zip" \
+          -x "agentspec/tmp/*" \
+          -x "agentspec/dist/*" \
+          -x "agentspec/build/*" \
+          -x "agentspec/.env" \
+          -x "agentspec/.env.local" \
+          -x "agentspec/node_modules/*" \
+          -x "agentspec/__pycache__/*" \
+          -x "agentspec/src/*.egg-info/*" \
+          -x "agentspec/.pytest_cache/*"
+        echo "Package created: $OUTFILE"
+
+  ci:
+    desc: Run full CI pipeline (lint + validate + test)
+    cmds:
+      - task: lint
+      - task: validate
+      - task: test

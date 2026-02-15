@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AgentSpec: Validate Configs",
+      "type": "shell",
+      "command": "./scripts/agentspec.sh",
+      "args": ["validate"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AgentSpec: List Configs",
+      "type": "shell",
+      "command": "./scripts/agentspec.sh",
+      "args": ["list"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AgentSpec: New Agent",
+      "type": "shell",
+      "command": "./scripts/agentspec.sh",
+      "args": ["new-agent"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "isBackground": false,
+      "problemMatcher": []
+    },
+    {
+      "label": "AgentSpec: New Skill",
+      "type": "shell",
+      "command": "./scripts/agentspec.sh",
+      "args": ["new-skill"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "isBackground": false,
+      "problemMatcher": []
+    },
+    {
+      "label": "AgentSpec: Run Tests",
+      "type": "shell",
+      "command": "bash",
+      "args": ["tests/test_validate.sh"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

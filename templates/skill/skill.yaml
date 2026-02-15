@@ -1,0 +1,28 @@
+name: {{SKILL_NAME}}
+description: {{SKILL_DESCRIPTION}}
+version: 1.0.0
+author: {{AUTHOR}}
+tags:
+  - {{TAG1}}
+  - {{TAG2}}
+
+system_prompt: |
+  {{SYSTEM_PROMPT}}
+
+inputs:
+  - name: {{INPUT_NAME}}
+    description: {{INPUT_DESCRIPTION}}
+    required: true
+
+outputs:
+  - name: {{OUTPUT_NAME}}
+    description: {{OUTPUT_DESCRIPTION}}
+    format: markdown
+
+steps:
+  - name: analyze
+    description: Analyze the input requirements
+  - name: generate
+    description: Generate the output
+  - name: review
+    description: Review and refine the output

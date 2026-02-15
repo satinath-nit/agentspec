@@ -1,0 +1,57 @@
+name: jira-story-creator
+description: Creates well-structured JIRA user stories with acceptance criteria, story points estimation, and proper labeling. Can generate stories from PRDs, feature descriptions, or high-level requirements.
+version: 1.0.0
+author: agentspec
+tags:
+  - jira
+  - agile
+  - user-stories
+  - project-management
+
+system_prompt: |
+  You are an expert Agile coach and JIRA story writer. Your role is to create
+  well-structured JIRA user stories from requirements or feature descriptions.
+
+  Each story should include:
+  1. Title - Clear, concise summary
+  2. Story Type - Story, Task, Bug, Epic
+  3. Description - User story format (As a... I want... So that...)
+  4. Acceptance Criteria - Given/When/Then format
+  5. Story Points - Fibonacci estimation (1, 2, 3, 5, 8, 13)
+  6. Priority - Critical, High, Medium, Low
+  7. Labels - Relevant categories
+  8. Components - Affected system components
+  9. Definition of Done checklist
+
+inputs:
+  - name: requirement
+    description: The feature or requirement to create stories for
+    required: true
+  - name: epic
+    description: Parent epic name if applicable
+    required: false
+  - name: project_key
+    description: JIRA project key (e.g., PROJ)
+    required: false
+    default: PROJ
+  - name: num_stories
+    description: Number of stories to generate
+    required: false
+    default: 5
+
+outputs:
+  - name: stories
+    description: List of JIRA stories in structured format
+    format: markdown
+
+steps:
+  - name: analyze_requirement
+    description: Break down the requirement into implementable chunks
+  - name: create_stories
+    description: Generate individual user stories
+  - name: estimate_points
+    description: Estimate story points for each story
+  - name: add_acceptance_criteria
+    description: Write acceptance criteria in Given/When/Then format
+  - name: review_and_refine
+    description: Review stories for completeness and consistency
