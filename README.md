@@ -1,8 +1,9 @@
-# AgentSpec
+<img width="606" height="139" alt="image" src="https://github.com/user-attachments/assets/f0f61ff8-218f-424c-9544-d50766bca638" />
 
-> An open-source toolkit for creating, managing, and sharing AI agent configurations and skills. Define your agent behaviors as structured YAML configurations, pair them with prompt files, and let your IDE's AI assistant use them to deliver consistent, repeatable results across your team.
 
-Built with Python using [typer](https://typer.tiangolo.com/), [rich](https://rich.readthedocs.io/), and [readchar](https://github.com/magmax/python-readchar) for a polished interactive terminal experience.
+
+An open-source toolkit for creating, managing, and sharing AI agent configurations and skills. Define your agent behaviors as structured YAML configurations, pair them with prompt files, and let your IDE's AI assistant use them to deliver consistent, repeatable results across your team.
+
 
 ---
 
