@@ -151,7 +151,7 @@ You should see the AgentSpec banner and a list of available commands.
 ```bash
 agentspec init my-ai-project
 ```
-<img width="1440" height="593" alt="image" src="https://github.com/user-attachments/assets/3cf774dc-795e-49c5-8835-1b86a89f2fb6" />
+<img width="1434" height="536" alt="Screenshot 2026-02-14 at 9 50 06 PM" src="https://github.com/user-attachments/assets/a2c450b7-a32f-4848-b960-9a051503cdbe" />
 
 This launches the interactive setup:
 
